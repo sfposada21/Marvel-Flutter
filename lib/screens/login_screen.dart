@@ -1,24 +1,45 @@
 import 'package:flutter/material.dart';
-
 import '../themes/theme.dart';
 import '../widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Background(
-      child: SingleChildScrollView(
-          child: Column(
-            children:  [
-             const SizedBox( height: 200,),
-              CardContainer( 
-                child: Column(
-                  children: const [
-                     Text('Login', style: TextStyle( fontSize: 28, color: Color.fromARGB(255, 90, 41, 48)  ),), 
-                  ]
-                  ))
-            ]
-            )),
+    return Scaffold(
+      body: Background(
+        child: SingleChildScrollView(
+            child: Column(
+              children:  [
+               const SizedBox( height: 200,),
+                CardContainer( 
+                  child: Column(
+                    children: const [
+                       Text('Login', style: TextStyle( fontSize: 28, color: ColorsApp.gremory ),), 
+                       SizedBox( height: 30,),
+                       FormEmail(),
+                    ]
+                    )),
+                const SizedBox( height: 50,),
+                TextButton(
+                  style: ButtonStyle( 
+                    overlayColor: MaterialStateProperty.all( Colors.indigo.withOpacity(0.4),),
+                    shape: MaterialStateProperty.all( StadiumBorder() )                  
+                  ),
+                  onPressed: ()=> Navigator.pushReplacementNamed(context, 'home'),
+                  child: Text( 'Crear una nueva cuenta', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
+                const SizedBox( height: 10,),
+                TextButton(
+                  style: ButtonStyle( 
+                    overlayColor: MaterialStateProperty.all( Colors.indigo.withOpacity(0.4),),
+                    shape: MaterialStateProperty.all( StadiumBorder() )                  
+                  ),
+                  onPressed: ()=> Navigator.pushReplacementNamed(context, 'home'),
+                  child: Text( 'Crear una nueva cuenta', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
+                const SizedBox( height: 80,),
+
+              ]
+              )),
+      ),
     );
   }
 }
@@ -30,20 +51,50 @@ class FormEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
-          TextFormField(
-            keyboardType: TextInputType.emailAddress,           
-            onChanged: (value) => {},
-           
-          ),
-          const SizedBox( height: 30,),
-          TextFormField(
-            obscureText: true,
-            keyboardType: TextInputType.emailAddress,            
-            onChanged: ( value ) => {},                  
-        ),
+         TextFormField(
+              autocorrect: false,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecorations.authInputDecoracion(hintText: 'Example@gmail.com', labelText: 'Correo electronico', prefixIcon: Icons.alternate_email),
+              onChanged: ( value ) => {},              
+              validator: (value) {
+                String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                RegExp regExp  = new RegExp(pattern);
+                return regExp.hasMatch(value ?? '')
+                  ? null 
+                  : 'El valor ingresado no es un correo';                
+              },
+            ),
+            const SizedBox( height: 30,),
+            TextFormField(
+              autocorrect: false,
+              obscureText: true,
+              onChanged: ( value ) => {},  
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecorations.authInputDecoracion(hintText: '********', labelText: 'Contraseña', prefixIcon: Icons.lock_outline),
+              validator: (value) {
+                 return ( value != null && value.length >= 6 ) 
+                    ? null
+                    : 'La contraseña debe de ser de 6 caracteres';               
+              },
+            
+            ),
+            const SizedBox( height: 30,),
+             MaterialButton(
+              shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10)),
+              disabledColor: Colors.grey,
+              elevation: 0,
+              color: ColorsApp.gremory ,
+              onPressed: () {                
+              },
+              child: Container(
+                padding:  const EdgeInsets.symmetric(horizontal: 70, vertical: 20),
+                child: const Text('Ingresar',
+                  style: TextStyle( color: Colors.white ),
+                ))),
         ],
       ),
     );

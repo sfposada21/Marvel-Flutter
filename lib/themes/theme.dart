@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-
   static const Color primary = Colors.purple;
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     // Color primario
@@ -14,6 +13,11 @@ class AppTheme {
   );
 }
 
+class ColorsApp {
+  static const Color gremory = Color.fromARGB(255, 90, 41, 48) ;
+  static const Color red = Color.fromARGB(255, 197, 40, 40);
+}
+
 class InputDecorations {
   static InputDecoration authInputDecoracion({
     required String hintText,
@@ -22,15 +26,14 @@ class InputDecorations {
   }) {
     return InputDecoration(
         enabledBorder:
-            const UnderlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
+            const UnderlineInputBorder(borderSide: BorderSide(color: ColorsApp.gremory )),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.purple, width: 2),
+          borderSide: BorderSide(color: ColorsApp.gremory , width: 2),
         ),
         hintText: hintText,
         labelText: labelText,
         labelStyle: const TextStyle(color: Colors.grey),
-        prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: Colors.purple) : null
-        
+        prefixIcon: prefixIcon != null ? Icon(prefixIcon, color: ColorsApp.gremory ) : null        
         );
   }
 }

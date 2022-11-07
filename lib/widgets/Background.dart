@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../themes/theme.dart';
+
 
 class Background extends StatelessWidget {
 
@@ -66,8 +68,8 @@ BoxDecoration _RedDecoration() => const BoxDecoration(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-      Color.fromARGB(255, 197, 40, 40),
-      Color.fromARGB(255, 90, 41, 48)      
+      ColorsApp.red,
+      ColorsApp.gremory      
       ],
       stops: [ 0.5, 1]
       )

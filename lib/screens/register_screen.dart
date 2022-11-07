@@ -5,7 +5,9 @@ import '../services/services.dart';
 import '../themes/theme.dart';
 import '../widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

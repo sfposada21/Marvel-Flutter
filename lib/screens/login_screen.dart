@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/provider.dart';
+import '../services/services.dart';
 import '../themes/theme.dart';
 import '../widgets/widgets.dart';
 
@@ -45,13 +48,18 @@ class LoginScreen extends StatelessWidget {
 }
 
 class FormEmail extends StatelessWidget {
+  
   const FormEmail({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    final formProvider = Provider.of<FormProvider>(context);
+
     return Form(
+      key: formProvider.formKeyProvider,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
@@ -59,7 +67,7 @@ class FormEmail extends StatelessWidget {
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoracion(hintText: 'Example@gmail.com', labelText: 'Correo electronico', prefixIcon: Icons.alternate_email),
-              onChanged: ( value ) => {},              
+              onChanged: ( value ) => formProvider.email = value,             
               validator: (value) {
                 String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                 RegExp regExp  = new RegExp(pattern);
@@ -72,7 +80,7 @@ class FormEmail extends StatelessWidget {
             TextFormField(
               autocorrect: false,
               obscureText: true,
-              onChanged: ( value ) => {},  
+              onChanged: ( value ) => formProvider.password = value,  
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoracion(hintText: '********', labelText: 'Contraseña', prefixIcon: Icons.lock_outline),
               validator: (value) {
@@ -88,7 +96,25 @@ class FormEmail extends StatelessWidget {
               disabledColor: Colors.grey,
               elevation: 0,
               color: ColorsApp.gremory ,
-              onPressed: () {                
+              onPressed:formProvider.isLoading ? null : () async {     
+                        
+                FocusScope.of(context).unfocus();            
+                final authService = Provider.of<AuthService>(context, listen: false);
+
+                if( !formProvider.isValidForm() ) return;
+                formProvider.isLoading = true;
+                final String? message = await authService.loginUser(formProvider.email, formProvider.password);
+                /* print('------ llego v2 ------');    
+                print(message); */ 
+                if ( message == null){
+                  print('Algo paso aqui'); 
+                  formProvider.isLoading = true;
+                  Navigator.pushReplacementNamed(context, 'home');
+                } else {
+                  print(message); 
+                  formProvider.isLoading = false;       
+                }      
+
               },
               child: Container(
                 padding:  const EdgeInsets.symmetric(horizontal: 70, vertical: 20),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/provider.dart';
 import 'routers/router.dart';
+import 'services/services.dart';
 import 'themes/theme.dart';
 
 void main() => runApp(const AppState());
@@ -14,6 +15,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ( _ ) => FormProvider() ),
+        ChangeNotifierProvider(create: ( _ ) => AuthService() ),
       ],
       child: const MyApp(),
       );

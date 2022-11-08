@@ -8,7 +8,7 @@ import '../widgets/widgets.dart';
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Background(
@@ -18,29 +18,35 @@ class RegisterScreen extends StatelessWidget {
                const SizedBox( height: 200,),
                 CardContainer( 
                   child: Column(
-                    children: const [
-                       Text('Login', style: TextStyle( fontSize: 28, color: ColorsApp.gremory ),), 
-                       SizedBox( height: 30,),
-                       _FormEmail(),
+                    children: [
+                       const Text('Registro', style: TextStyle( fontSize: 28, color: ColorsApp.gremory ),), 
+                       const SizedBox( height: 20,),
+                       ChangeNotifierProvider(create: ( _ ) => FormProvider(), 
+                        child: _FormEmail(),
+                        ),
                     ]
                     )),
-                const SizedBox( height: 50,),
-                TextButton(
-                  style: ButtonStyle( 
-                    overlayColor: MaterialStateProperty.all( Colors.indigo.withOpacity(0.4),),
-                    shape: MaterialStateProperty.all( StadiumBorder() )                  
-                  ),
+                const SizedBox( height: 20,),
+                 MaterialButton(
+                  minWidth: 220,
+                  height: 50,
+                  shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10)),
+                  disabledColor: ColorsApp.grey,
+                  elevation: 0,
+                  color: ColorsApp.green ,
+                  onPressed: ()=> Navigator.pushReplacementNamed(context, 'login'),
+                  child: Text( 'Iniciar sesión', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
+                const SizedBox( height: 20,),
+                MaterialButton(
+                  minWidth: 220,    
+                  height: 50,              
+                  shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10)),
+                  disabledColor: ColorsApp.grey,
+                  elevation: 0,
+                  color: ColorsApp.white,
                   onPressed: ()=> Navigator.pushReplacementNamed(context, 'home'),
-                  child: Text( 'Crear una nueva cuenta', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
-                const SizedBox( height: 10,),
-                TextButton(
-                  style: ButtonStyle( 
-                    overlayColor: MaterialStateProperty.all( Colors.indigo.withOpacity(0.4),),
-                    shape: MaterialStateProperty.all( StadiumBorder() )                  
-                  ),
-                  onPressed: ()=> Navigator.pushReplacementNamed(context, 'home'),
-                  child: Text( 'Crear una nueva cuenta', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
-                const SizedBox( height: 80,),
+                  child: Text( 'Ingresar con Google', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
+                const SizedBox( height: 40,),
 
               ]
               )),
@@ -49,11 +55,7 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
-class _FormEmail extends StatelessWidget {
-  
-  const _FormEmail({
-    Key? key,
-  }) : super(key: key);
+class _FormEmail extends StatelessWidget {  
 
   @override
   Widget build(BuildContext context) {
@@ -98,29 +100,25 @@ class _FormEmail extends StatelessWidget {
               disabledColor: Colors.grey,
               elevation: 0,
               color: ColorsApp.gremory ,
-              onPressed:formProvider.isLoading ? null : () async {     
-                        
+               onPressed:formProvider.isLoading ? null : () async {                
                 FocusScope.of(context).unfocus();            
                 final authService = Provider.of<AuthService>(context, listen: false);
 
                 if( !formProvider.isValidForm() ) return;
                 formProvider.isLoading = true;
-                final String? message = await authService.loginUser(formProvider.email, formProvider.password);
-                /* print('------ llego v2 ------');    
-                print(message); */ 
+
+                final String? message = await authService.createUser(formProvider.email, formProvider.password);
                 if ( message == null){
-                  print('Algo paso aqui'); 
-                  formProvider.isLoading = true;
                   Navigator.pushReplacementNamed(context, 'home');
                 } else {
-                  print(message); 
+                  NotificationsService.showSnackbar(  message );
                   formProvider.isLoading = false;       
                 }      
 
               },
               child: Container(
                 padding:  const EdgeInsets.symmetric(horizontal: 70, vertical: 20),
-                child: const Text('Ingresar',
+                child: const Text('Registrar',
                   style: TextStyle( color: Colors.white ),
                 ))),
         ],

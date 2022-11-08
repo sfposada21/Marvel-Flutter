@@ -55,7 +55,7 @@ class _RexBox extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(top: 80, left: 20, child: _Marco()),
-          Positioned(bottom: 80, left: 20, child: _Marco()),
+          Positioned(bottom: 20, left: 20, child: _Marco()),
           Positioned(top: 80, left: 20, child: _MarcoVertical()),
           Positioned(top: 80, right: 20, child: _MarcoVertical()),
         ],
@@ -94,7 +94,7 @@ class _MarcoVertical extends StatelessWidget {
     var size =  MediaQuery.of(context).size;
     return Container(
       width: 5,
-      height: size.height-160,
+      height: size.height-100,
       color: Colors.white,     
     );
   }

@@ -16,6 +16,9 @@ class AppTheme {
 class ColorsApp {
   static const Color gremory = Color.fromARGB(255, 90, 41, 48) ;
   static const Color red = Color.fromARGB(255, 197, 40, 40);
+  static const Color white = Color.fromARGB(255, 255, 255, 255);  
+  static const Color green = Color.fromARGB(255, 85, 218, 109);  
+  static const Color grey = Color.fromARGB(255, 163, 172, 165);
 }
 
 class InputDecorations {

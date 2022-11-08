@@ -16,29 +16,35 @@ class LoginScreen extends StatelessWidget {
                const SizedBox( height: 200,),
                 CardContainer( 
                   child: Column(
-                    children: const [
-                       Text('Login', style: TextStyle( fontSize: 28, color: ColorsApp.gremory ),), 
-                       SizedBox( height: 30,),
-                       _FormEmail(),
+                    children: [
+                       const Text('Login', style: TextStyle( fontSize: 28, color: ColorsApp.gremory ),), 
+                       const SizedBox( height: 20,),
+                       ChangeNotifierProvider(create: ( _ ) => FormProvider(), 
+                        child: _FormEmail(),
+                        ),
                     ]
                     )),
-                const SizedBox( height: 50,),
-                TextButton(
-                  style: ButtonStyle( 
-                    overlayColor: MaterialStateProperty.all( Colors.indigo.withOpacity(0.4),),
-                    shape: MaterialStateProperty.all( StadiumBorder() )                  
-                  ),
-                  onPressed: ()=> Navigator.pushReplacementNamed(context, 'home'),
+                const SizedBox( height: 20,),
+                 MaterialButton(
+                  minWidth: 220,
+                  height: 50,
+                  shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10)),
+                  disabledColor: ColorsApp.grey,
+                  elevation: 0,
+                  color: ColorsApp.green ,
+                  onPressed: ()=> Navigator.pushReplacementNamed(context, 'register'),
                   child: Text( 'Crear una nueva cuenta', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
-                const SizedBox( height: 10,),
-                TextButton(
-                  style: ButtonStyle( 
-                    overlayColor: MaterialStateProperty.all( Colors.indigo.withOpacity(0.4),),
-                    shape: MaterialStateProperty.all( StadiumBorder() )                  
-                  ),
+                const SizedBox( height: 20,),
+                MaterialButton(
+                  minWidth: 220,    
+                  height: 50,              
+                  shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10)),
+                  disabledColor: ColorsApp.grey,
+                  elevation: 0,
+                  color: ColorsApp.white,
                   onPressed: ()=> Navigator.pushReplacementNamed(context, 'home'),
-                  child: Text( 'Crear una nueva cuenta', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
-                const SizedBox( height: 80,),
+                  child: Text( 'Ingresar con Google', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
+                const SizedBox( height: 40,),
 
               ]
               )),
@@ -49,10 +55,6 @@ class LoginScreen extends StatelessWidget {
 
 class _FormEmail extends StatelessWidget {
   
-  const _FormEmail({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
 

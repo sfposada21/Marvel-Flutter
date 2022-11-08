@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "763074821971",
+    "firebase_url": "https://flutter-varios-2dbfc-default-rtdb.firebaseio.com",
+    "project_id": "flutter-varios-2dbfc",
+    "storage_bucket": "flutter-varios-2dbfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763074821971:android:768afb40a3b06f0579aba6",
+        "android_client_info": {
+          "package_name": "com.example.marvel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763074821971-pi3thkj2bqvssl46kcichcqhhraab4nh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCARbyqzyi0c2QuT_GUwd3GMQn0G29IRts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763074821971-pi3thkj2bqvssl46kcichcqhhraab4nh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763074821971:android:6ac8117c37f6f4ed79aba6",
+        "android_client_info": {
+          "package_name": "com.stivenposada.notificaciones"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763074821971-pi3thkj2bqvssl46kcichcqhhraab4nh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCARbyqzyi0c2QuT_GUwd3GMQn0G29IRts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763074821971-pi3thkj2bqvssl46kcichcqhhraab4nh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

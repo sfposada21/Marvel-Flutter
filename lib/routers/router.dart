@@ -3,7 +3,7 @@ import '../screens/screens.dart';
 
 class AppRoutes{
 
-  static const initialRoute = 'login';
+  static const initialRoute = 'home';
   static Map<String, Widget Function(BuildContext)> routes = {
       'home'      : ( BuildContext context) =>  HomeScreen(),
       'login'  : ( BuildContext context) =>  LoginScreen(),

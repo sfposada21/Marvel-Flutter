@@ -44,7 +44,10 @@ class RegisterScreen extends StatelessWidget {
                   disabledColor: ColorsApp.grey,
                   elevation: 0,
                   color: ColorsApp.white,
-                  onPressed: ()=> Navigator.pushReplacementNamed(context, 'home'),
+                  onPressed: (){
+                      LoginInGoogle().signInWithGoogle();
+                      onPressed: ()=> Navigator.pushReplacementNamed(context, 'home');
+                     },
                   child: Text( 'Ingresar con Google', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
                 const SizedBox( height: 40,),
 

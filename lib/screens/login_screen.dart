@@ -45,6 +45,7 @@ class LoginScreen extends StatelessWidget {
                   color: ColorsApp.white,
                   onPressed: (){
                       LoginInGoogle().signInWithGoogle();
+                      onPressed: ()=> Navigator.pushReplacementNamed(context, 'home');
                      },
                   child: Text( 'Ingresar con Google', style: TextStyle( fontSize: 18, color: Colors.black87 ))),
                 const SizedBox( height: 40,),

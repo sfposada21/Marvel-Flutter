@@ -21,10 +21,12 @@ class BackgroundComic extends StatelessWidget {
           fit:  BoxFit.cover
           )
       ),
-      child: Stack(
-        children: [             
-        child,
-        ],
+      child: SingleChildScrollView(
+        child: Stack(
+          children: [             
+          child,
+          ],
+        ),
       ),
     );
   }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:marvel_app/models/models.dart';
-import 'package:marvel_app/widgets/Background_home.dart';
 import 'package:provider/provider.dart';
-
 import '../services/services.dart';
+import '../widgets/comicsSlider.dart';
+import '../widgets/widgets.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -23,9 +22,19 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: BackgroundHome(
-        child: Text('Hola Mundo'),
-    
-    
+        child: Column(
+          children: const [
+            SizedBox( height: 60,),
+            Center(child: Text('El Universo Marvel', 
+              style: TextStyle(
+                color: Colors.white, 
+                fontSize: 28,
+                fontWeight: FontWeight.bold),)),
+            SizedBox( height: 80,),
+            ComicsSlider( )
+
+          ],
+        ),   
      ),
    );
   }

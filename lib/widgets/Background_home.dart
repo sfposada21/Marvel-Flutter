@@ -1,8 +1,6 @@
 
 import 'package:flutter/material.dart';
-
 import '../themes/theme.dart';
-
 
 class BackgroundHome extends StatelessWidget {
 
@@ -46,9 +44,9 @@ class _SpaceBackground extends StatelessWidget {
         children: [
           const SizedBox( height: 140,),
           Container(
-            color: Color.fromARGB(120, 245, 244, 244),
+            color: Color.fromARGB(100, 245, 244, 244),
             width: double.infinity,
-            height: size.height -140,
+            height: 310,
           ),
         ],
       ),

@@ -16,9 +16,9 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const  Text( 'Comics marvel'),
         actions: [
-          IconButton(onPressed: () => {}, icon: const Icon(Icons.favorite)),
-          IconButton(onPressed: () => {}, icon: const Icon(Icons.login_outlined)),
-          IconButton(onPressed: () => {}, icon: const Icon(Icons.home))
+          IconButton(onPressed: ()=> Navigator.pushReplacementNamed(context, 'favorite'), icon: const Icon(Icons.favorite)),
+          IconButton(onPressed: ()=> Navigator.pushReplacementNamed(context, 'login'), icon: const Icon(Icons.login_outlined)),
+          IconButton(onPressed: ()=> Navigator.pushReplacementNamed(context, 'home'), icon: const Icon(Icons.home))
         ],
       ),
       body: BackgroundHome(

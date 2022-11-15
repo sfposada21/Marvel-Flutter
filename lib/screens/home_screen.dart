@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_app/models/models.dart';
 import 'package:marvel_app/widgets/Background_home.dart';
+import 'package:provider/provider.dart';
+
+import '../services/services.dart';
 
 
 class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final comic = Provider.of<ComicsService>( context);
+
     return  Scaffold(
       appBar: AppBar(
         title: const  Text( 'Comics marvel'),

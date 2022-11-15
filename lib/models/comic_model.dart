@@ -4,99 +4,23 @@
 
 import 'dart:convert';
 
-ComicMarvel comicMarvelFromJson(String str) => ComicMarvel.fromJson(json.decode(str));
-
-String comicMarvelToJson(ComicMarvel data) => json.encode(data.toJson());
-
 class ComicMarvel {
     ComicMarvel({
-        required this.code,
-        required this.status,
-        required this.copyright,
-        required this.attributionText,
-        required this.attributionHtml,
-        required this.etag,
-        required this.data,
-    });
-
-    int code;
-    String status;
-    String copyright;
-    String attributionText;
-    String attributionHtml;
-    String etag;
-    Data data;
-
-    factory ComicMarvel.fromJson(Map<String, dynamic> json) => ComicMarvel(
-        code: json["code"],
-        status: json["status"],
-        copyright: json["copyright"],
-        attributionText: json["attributionText"],
-        attributionHtml: json["attributionHTML"],
-        etag: json["etag"],
-        data: Data.fromJson(json["data"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "code": code,
-        "status": status,
-        "copyright": copyright,
-        "attributionText": attributionText,
-        "attributionHTML": attributionHtml,
-        "etag": etag,
-        "data": data.toJson(),
-    };
-}
-
-class Data {
-    Data({
-        required this.offset,
-        required this.limit,
-        required this.total,
-        required this.count,
-        required this.results,
-    });
-
-    int offset;
-    int limit;
-    int total;
-    int count;
-    List<Result> results;
-
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
-        offset: json["offset"],
-        limit: json["limit"],
-        total: json["total"],
-        count: json["count"],
-        results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "offset": offset,
-        "limit": limit,
-        "total": total,
-        "count": count,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
-    };
-}
-
-class Result {
-    Result({
         required this.id,
         required this.digitalId,
-        required this.title,
+        this.title,
         required this.issueNumber,
         required this.variantDescription,
         required this.description,
         required this.modified,
         required this.isbn,
         required this.upc,
-        this.diamondCode,
+        required this.diamondCode,
         required this.ean,
         required this.issn,
-        this.format,
+        required this.format,
         required this.pageCount,
-        required this.textObjects,
+        this.textObjects,
         required this.resourceUri,
         required this.urls,
         required this.series,
@@ -106,28 +30,28 @@ class Result {
         required this.dates,
         required this.prices,
         required this.thumbnail,
-        required this.images,
-        required this.creators,
-        required this.characters,
-        required this.stories,
-        required this.events,
+        this.images,
+        this.creators,
+        this.characters,
+        this.stories,
+        this.events,
     });
 
     int id;
     int digitalId;
-    String title;
+    String? title;
     int issueNumber;
     String variantDescription;
     String description;
     String modified;
     String isbn;
     String upc;
-    DiamondCode? diamondCode;
+    String diamondCode;
     String ean;
     String issn;
-    Format? format;
+    String format;
     int pageCount;
-    List<TextObject> textObjects;
+    List<TextObject>? textObjects;
     String resourceUri;
     List<Url> urls;
     Series series;
@@ -137,13 +61,13 @@ class Result {
     List<Date> dates;
     List<Price> prices;
     Thumbnail thumbnail;
-    List<Thumbnail> images;
-    Creators creators;
-    Characters characters;
-    Stories stories;
-    Characters events;
+    List<Thumbnail>? images;
+    Creators? creators;
+    Characters? characters;
+    Stories? stories;
+    Characters? events;
 
-    factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory ComicMarvel.fromJson(Map<String, dynamic> json) => ComicMarvel(
         id: json["id"],
         digitalId: json["digitalId"],
         title: json["title"],
@@ -153,73 +77,70 @@ class Result {
         modified: json["modified"],
         isbn: json["isbn"],
         upc: json["upc"],
-        diamondCode: diamondCodeValues.map[json["diamondCode"]],
+        diamondCode: json["diamondCode"],
         ean: json["ean"],
         issn: json["issn"],
-        format: formatValues.map[json["format"]],
+        format: json["format"],
         pageCount: json["pageCount"],
-        textObjects: List<TextObject>.from(json["textObjects"].map((x) => TextObject.fromJson(x))),
         resourceUri: json["resourceURI"],
         urls: List<Url>.from(json["urls"].map((x) => Url.fromJson(x))),
         series: Series.fromJson(json["series"]),
         variants: List<Series>.from(json["variants"].map((x) => Series.fromJson(x))),
         collections: List<dynamic>.from(json["collections"].map((x) => x)),
-        collectedIssues: List<Series>.from(json["collectedIssues"].map((x) => Series.fromJson(x))),
         dates: List<Date>.from(json["dates"].map((x) => Date.fromJson(x))),
         prices: List<Price>.from(json["prices"].map((x) => Price.fromJson(x))),
         thumbnail: Thumbnail.fromJson(json["thumbnail"]),
-        images: List<Thumbnail>.from(json["images"].map((x) => Thumbnail.fromJson(x))),
-        creators: Creators.fromJson(json["creators"]),
         characters: Characters.fromJson(json["characters"]),
-        stories: Stories.fromJson(json["stories"]),
-        events: Characters.fromJson(json["events"]),
+        events: Characters.fromJson(json["events"]), 
+        collectedIssues: [],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "digitalId": digitalId,
-        "title": title,
+        "title": [title],
         "issueNumber": issueNumber,
         "variantDescription": variantDescription,
         "description": description,
         "modified": modified,
         "isbn": isbn,
         "upc": upc,
-        "diamondCode": diamondCodeValues.reverse[diamondCode],
+        "diamondCode": diamondCode,
         "ean": ean,
         "issn": issn,
-        "format": formatValues.reverse[format],
+        "format": format,
         "pageCount": pageCount,
-        "textObjects": List<dynamic>.from(textObjects.map((x) => x.toJson())),
+        "textObjects": List<dynamic>.from(textObjects!.map((x) => x)),
         "resourceURI": resourceUri,
         "urls": List<dynamic>.from(urls.map((x) => x.toJson())),
         "series": series.toJson(),
         "variants": List<dynamic>.from(variants.map((x) => x.toJson())),
         "collections": List<dynamic>.from(collections.map((x) => x)),
-        "collectedIssues": List<dynamic>.from(collectedIssues.map((x) => x.toJson())),
+        "collectedIssues": List<dynamic>.from(collectedIssues.map((x) => x)),
         "dates": List<dynamic>.from(dates.map((x) => x.toJson())),
         "prices": List<dynamic>.from(prices.map((x) => x.toJson())),
         "thumbnail": thumbnail.toJson(),
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
-        "creators": creators.toJson(),
-        "characters": characters.toJson(),
-        "stories": stories.toJson(),
-        "events": events.toJson(),
+        "images": List<dynamic>.from(images!.map((x) => x)),
+        "creators": creators!.toJson(),
+        "characters": characters!.toJson(),
+        "stories": stories!.toJson(),
+        "events": events!.toJson(),
     };
+
 }
 
 class Characters {
     Characters({
-        required this.available,
-        required this.collectionUri,
-        required this.items,
-        required this.returned,
+        this.available,
+        this.collectionUri,
+        this.items,
+        this.returned,
     });
 
-    int available;
-    String collectionUri;
-    List<Series> items;
-    int returned;
+    int? available;
+    String? collectionUri;
+    List<Series>? items;
+    int? returned;
 
     factory Characters.fromJson(Map<String, dynamic> json) => Characters(
         available: json["available"],
@@ -231,7 +152,7 @@ class Characters {
     Map<String, dynamic> toJson() => {
         "available": available,
         "collectionURI": collectionUri,
-        "items": List<dynamic>.from(items.map((x) => x.toJson())),
+        "items": List<dynamic>.from(items!.map((x) => x.toJson())),
         "returned": returned,
     };
 }
@@ -349,11 +270,6 @@ final dateTypeValues = EnumValues({
 });
 
 enum DiamondCode { EMPTY, JUL190068 }
-
-final diamondCodeValues = EnumValues({
-    "": DiamondCode.EMPTY,
-    "JUL190068": DiamondCode.JUL190068
-});
 
 enum Format { EMPTY, TRADE_PAPERBACK, COMIC, DIGEST }
 

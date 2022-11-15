@@ -4,11 +4,41 @@ import 'package:provider/provider.dart';
 import '../models/comic_model.dart';
 import '../services/services.dart';
 
-class ComicsSlider extends StatelessWidget {
+class ComicsSlider extends StatefulWidget {
+  
+  
+  final Function onNextPage;
   
   const ComicsSlider({
-    Key? key,
+    Key? key, required this.onNextPage,
   }) : super(key: key);
+
+  @override
+  State<ComicsSlider> createState() => _ComicsSliderState();
+}
+
+class _ComicsSliderState extends State<ComicsSlider> {
+
+  
+  final ScrollController scrollController = new ScrollController();
+
+  @override
+  void initState() { 
+    super.initState();    
+    scrollController.addListener(() {      
+      if ( scrollController.position.pixels >= scrollController.position.maxScrollExtent - 500 ) {
+        widget.onNextPage();
+      }    
+    });
+
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +54,7 @@ class ComicsSlider extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-                controller: null,
+                controller: scrollController,
                 scrollDirection: Axis.horizontal,
                 itemCount: marvel.listComics.length,
                 itemBuilder: (_, int index) => _portadaComic(comic: marvel.listComics[index],)                
@@ -51,17 +81,19 @@ class _portadaComic extends StatelessWidget {
       height: 240, 
       margin: EdgeInsets.symmetric( horizontal: 10 ),
       child: GestureDetector(
-        onTap: () {        
-        },
+         onTap: () => Navigator.pushNamed(context, 'comic', arguments: comic ),
         child: Column(
           children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  width: 160,
-                  height: 210, 
-                  child: getImage( comic.thumbnail.path )),
-              ),
+            Hero(
+              tag: comic.id!,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    width: 160,
+                    height: 210, 
+                    child: getImage( comic.thumbnail.path )),
+                ),
+            ),
             const SizedBox( height: 5 ),
             Text( 
               comic.title ?? "No Found",

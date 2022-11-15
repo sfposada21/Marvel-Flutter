@@ -44,16 +44,14 @@ ComicsService(){
 
   Future moreLoadComics() async{
     print('Entro 2');
-
+    _offset += 20;
     final url = Uri.https( _baseUrl, '/v1/public/comics', {
       "ts" : _ts,
       "apikey" : _apikey,
       "hash" : _hash, 
       "offset" : '$_offset', 
       "limit" : '$_limit', 
-    });
-    _offset += 20;
-
+    });    
     final resp = await http.get(url);
     final respData = json.decode(resp.body);
     for (var comic in respData['data']['results']) {

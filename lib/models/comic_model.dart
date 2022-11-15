@@ -11,7 +11,7 @@ class ComicMarvel {
         this.title,
         required this.issueNumber,
         required this.variantDescription,
-        required this.description,
+        this.description,
         required this.modified,
         required this.isbn,
         required this.upc,
@@ -42,7 +42,7 @@ class ComicMarvel {
     String? title;
     int issueNumber;
     String variantDescription;
-    String description;
+    String? description;
     String modified;
     String isbn;
     String upc;

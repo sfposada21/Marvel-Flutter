@@ -23,15 +23,15 @@ class HomeScreen extends StatelessWidget {
       ),
       body: BackgroundHome(
         child: Column(
-          children: const [
-            SizedBox( height: 60,),
-            Center(child: Text('El Universo Marvel', 
+          children: [
+            const SizedBox( height: 60,),
+            const Center(child: Text('El Universo Marvel', 
               style: TextStyle(
                 color: Colors.white, 
                 fontSize: 28,
                 fontWeight: FontWeight.bold),)),
-            SizedBox( height: 80,),
-            ComicsSlider( )
+            const SizedBox( height: 80,),
+            ComicsSlider( onNextPage: ()=> comic.moreLoadComics() )
 
           ],
         ),   
